@@ -13,10 +13,9 @@ public class Episodio {
     public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio) {
         this.temporada = numeroTemporada;
         this.titulo = dadosEpisodio.titulo();
-        this.numeroEpisodio = dadosEpisodio.numeroEpisodio();
+        this.numeroEpisodio = dadosEpisodio.numero();
 
         try {
-            // vai converter a avaliacao que ta chegando em string em double
             this.avaliacao = Double.valueOf(dadosEpisodio.avaliacao());
         } catch (NumberFormatException ex) {
             this.avaliacao = 0.0;
@@ -25,13 +24,7 @@ public class Episodio {
         try {
             this.dataLancamento = LocalDate.parse(dadosEpisodio.dataLancamento());
         } catch (DateTimeParseException ex) {
-            // Se a data for "N/A", atribua null para dataLancamento
-            if (dadosEpisodio.dataLancamento().equals("N/A")) {
-                this.dataLancamento = null;
-            } else {
-                // Caso contrário, lance a exceção novamente
-                throw ex;
-            }
+            this.dataLancamento = null;
         }
     }
 
